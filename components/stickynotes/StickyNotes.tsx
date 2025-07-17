@@ -97,7 +97,7 @@ const StickyNotes = () => {
     return notes.find((note) => {
       if (note.id === draggedId) return false;
       
-      // Check if rectangles overlap
+
       const draggedLeft = x;
       const draggedRight = x + noteWidth;
       const draggedTop = y;
@@ -107,8 +107,7 @@ const StickyNotes = () => {
       const noteRight = note.x + noteWidth;
       const noteTop = note.y;
       const noteBottom = note.y + noteHeight;
-      
-      // Check for overlap
+
       const horizontalOverlap = draggedLeft < noteRight && draggedRight > noteLeft;
       const verticalOverlap = draggedTop < noteBottom && draggedBottom > noteTop;
       
@@ -121,8 +120,7 @@ const StickyNotes = () => {
     if (!container) return;
 
     const containerRect = container.getBoundingClientRect();
-    
-    // Calculate new position with proper bounds
+
     const noteWidth = 256;
     const noteHeight = 200;
     const maxX = container.clientWidth - noteWidth;
@@ -132,14 +130,12 @@ const StickyNotes = () => {
     const newY = Math.max(0, Math.min(info.point.y - containerRect.top, maxY));
     
     console.log(`Drag ended for note ${noteId} at position:`, { newX, newY });
-    
-    // Check for overlapping note
+
     const overlappingNote = getOverlappingNote(noteId, newX, newY);
     
     if (overlappingNote) {
       console.log(`Found overlapping note:`, overlappingNote.id);
-      
-      // Merge notes
+
       setNotes((prevNotes) => {
         const draggedNote = prevNotes.find(n => n.id === noteId);
         if (!draggedNote) return prevNotes;
@@ -158,7 +154,7 @@ const StickyNotes = () => {
         
         console.log(`Merging notes. Result:`, mergedText);
         
-        // Return notes with merged content and dragged note removed
+
         return prevNotes
           .filter((n) => n.id !== noteId)
           .map((n) =>
@@ -170,7 +166,7 @@ const StickyNotes = () => {
     } else {
       console.log(`No overlapping note found, just updating position`);
       
-      // No merge, just update position
+
       setNotes((prevNotes) =>
         prevNotes.map((note) =>
           note.id === noteId ? { ...note, x: newX, y: newY } : note
