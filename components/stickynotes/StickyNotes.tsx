@@ -325,7 +325,7 @@ const StickyNotes = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg"
+            className="bg-red-700 text-white px-4 py-3 rounded-full shadow-lg"
             onClick={() => setIsOpen((prev) => !prev)}
           >
             Choose a color
